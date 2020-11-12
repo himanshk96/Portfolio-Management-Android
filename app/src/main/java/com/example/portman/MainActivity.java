@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         sectionItems2.add("Hey");
         sectionItems2.add("Zey");
         sectionItems2.add("Fi");
+        sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");sectionItems2.add("Fi");
 
         sectionList.add(new Section(sectionName,sectionItems));
         sectionList.add(new Section(sectionName2,sectionItems2));

@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
-    android:id="@+id/main_content">
+    android:id="@+id/main_content"
+    android:orientation="vertical">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-</RelativeLayout>
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainRecyclerView"
+        android:layout_marginBottom="32dp"
+        android:text="Powered By Tingo"
+        app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintStart_toEndOf="@+id/mainRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/mainRecyclerView"></TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>
