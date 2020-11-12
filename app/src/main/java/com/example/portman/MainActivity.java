@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,8 +29,10 @@ import android.widget.ArrayAdapter;
 import android.widget.SimpleAdapter;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG="MainActivity";
     ArrayAdapter<String> arrayAdapter;
-
+    List<Section> sectionList=new ArrayList<>();
+    RecyclerView mainRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        initData();
+        mainRecyclerView=findViewById(R.id.mainRecyclerView);
+
+        MainRecyclerAdapter mainRecyclerAdapter=new MainRecyclerAdapter(sectionList);
+        mainRecyclerView.setAdapter(mainRecyclerAdapter);
+        mainRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
 
 
@@ -44,23 +53,42 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ListView listView=findViewById(R.id.my_list);
-        Button btn=(Button) findViewById(R.id.go_to_details);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Details.class));
-            }
-        });
-        List<String> mylist=new ArrayList<>();
-        mylist.add("Eraser");
-        mylist.add("iuhiasdhfa");
-        mylist.add("iabsdfbaf");
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,mylist);
+//        ListView listView=findViewById(R.id.my_list);
+//        Button btn=(Button) findViewById(R.id.go_to_details);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, Details.class));
+//            }
+//        });
+//        List<String> mylist=new ArrayList<>();
+//        mylist.add("Eraser");
+//        mylist.add("iuhiasdhfa");
+//        mylist.add("iabsdfbaf");
+//
+//        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,mylist);
+//
+//        listView.setAdapter(arrayAdapter);
 
-        listView.setAdapter(arrayAdapter);
 
+    }
+    private void initData(){
+        String sectionName="Portfolio";
+        List<String> sectionItems=new ArrayList<>();
+        sectionItems.add("Hello");
+        sectionItems.add("Bye");
+        sectionItems.add("Hi");
+
+        String sectionName2="Favorites";
+        List<String> sectionItems2=new ArrayList<>();
+        sectionItems2.add("Hey");
+        sectionItems2.add("Zey");
+        sectionItems2.add("Fi");
+
+        sectionList.add(new Section(sectionName,sectionItems));
+        sectionList.add(new Section(sectionName2,sectionItems2));
+        Log.d(TAG,"Referesh Every15 sec");
 
     }
 
