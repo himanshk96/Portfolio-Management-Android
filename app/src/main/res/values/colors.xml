@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="demo_theme_status_bar_color">#000</color>
+    <color name="grey">#f0eef1</color>
+    <color name="subTitle">#7b7b7b</color>
+    <color name="green">#519763</color>
 </resources>

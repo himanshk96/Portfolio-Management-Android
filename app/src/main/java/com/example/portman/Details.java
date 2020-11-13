@@ -1,6 +1,7 @@
 package com.example.portman;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +28,12 @@ import java.util.Map;
 public class Details extends AppCompatActivity {
     private static final String TAG = "Details";
     private TextView titleSymbolView;
+    private TextView titleCompanyView;
+    private TextView titlePriceView;
+    private TextView titleChangeView;
     HashMap<String,String> watchlist;
-    ImageButton starButton;
+    Boolean inWatchList;
+    ImageView starButton;
     String titleSymbol;
     HashMap<String,Integer> portfolio_qty= new HashMap<String,Integer>();
 //    HashMap<Integer, String> hash_map = new HashMap<Integer, String>();
@@ -40,22 +46,47 @@ public class Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        //Back Button to go back to MainActivity
+        Toolbar toolbar = findViewById(R.id.top_toolbar);
+//        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey_24dp);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
 
         titleSymbolView = (TextView) findViewById(R.id.titleSymbol);
-        Intent currIntent=getIntent();
+        titleCompanyView=(TextView) findViewById(R.id.titleCompany);
+        titlePriceView=(TextView) findViewById(R.id.titlePrice);
+        titleChangeView=(TextView) findViewById(R.id.titleChange);
 
+
+        Intent currIntent=getIntent();
         titleSymbol=currIntent.getStringExtra("symbol");
         Log.d(TAG, "onCreate: "+titleSymbol);
+
+        titleSymbolView.setText(titleSymbol);
+        titleCompanyView.setText("titleCompany");
+        titlePriceView.setText("Price");
+        titleChangeView.setText("Change");
+
+
+
         watchlist=readFromSP("watchlist");
         String company_name=watchlist.getOrDefault(titleSymbol,"Default");
-        titleSymbolView.setText(titleSymbol+company_name);
+        titleSymbolView.setText(titleSymbol);
 
 
-        starButton =(ImageButton) findViewById(R.id.starToggle);
+        starButton =(ImageView) findViewById(R.id.starToggle);
         starButton.setOnClickListener(new View.OnClickListener()   {
             public void onClick(View v)  {
                 try {
-                    //Go to Details;
                     watchlist.put(titleSymbol,"Apple Inc.");
                     insertToSP(watchlist,"watchlist");
 
