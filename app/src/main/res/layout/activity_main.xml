@@ -1,29 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity"
-    android:id="@+id/main_content"
-    android:orientation="vertical">
+    tools:context=".MainActivity" android:background="@color/white">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mainRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/include"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minHeight="?attr/actionBarSize"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:contentInsetStart="8dp"
+      app:layout_constraintVertical_bias="0.0"  android:background="@color/grey">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mainRecyclerView"
-        android:layout_marginBottom="32dp"
-        android:text="Powered By Tingo"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintStart_toEndOf="@+id/mainRecyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/mainRecyclerView"></TextView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+
+  </androidx.appcompat.widget.Toolbar>
+
+
+
+  <TextView
+      android:id="@+id/todaysDateView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingLeft="8dp"
+      android:text=""
+      android:textSize="24sp"
+      android:textStyle="bold"
+      android:textColor="@color/subTitle"
+      app:layout_constraintStart_toStartOf="parent"
+
+      app:layout_constraintTop_toBottomOf="@+id/include" />
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/mainRecyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/todaysDateView" />
+
+  <TextView
+      android:id="@+id/tiingoTextView"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:autoLink="web"
+      android:text="Powered by tiingo"
+      android:textAlignment="center"
+      android:textStyle="italic"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/mainRecyclerView"
+      app:layout_constraintVertical_bias="1.0" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    tools:context=".MainActivity"-->
+<!--    android:id="@+id/main_content"-->
+<!--    android:orientation="vertical">-->
+
+<!--  <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/mainRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        />-->
+<!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;    android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;    android:layout_height="wrap_content" android:orientation="vertical"&ndash;&gt;-->
+
+<!--&lt;!&ndash;    app:layout_constraintBottom_toBottomOf="@+id/mainRecyclerView"&ndash;&gt;-->
+<!--&lt;!&ndash;    app:layout_constraintStart_toEndOf="@+id/mainRecyclerView"&ndash;&gt;-->
+<!--&lt;!&ndash;   >&ndash;&gt;-->
+<!--    <TextView android:layout_above="@+id/mainRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--    android:id="@+id/footer"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:text="Powered By Tingo"-->
+<!--android:textAlignment="center"-->
+<!--        ></TextView>-->
+<!--&lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
+<!--</RelativeLayout>-->
+
+
+
+
+

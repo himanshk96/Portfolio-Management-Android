@@ -17,9 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import android.view.View;
@@ -27,6 +29,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
@@ -38,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar=findViewById(R.id.include);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.showOverflowMenu();
+
+        TextView todaysDateView1=findViewById(R.id.todaysDateView);
+        String currentDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date());
+        Log.d(TAG, "onCreate: Date"+ currentDate);
+        todaysDateView1.setText(currentDate);
 
 
         initData();
@@ -74,13 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void initData(){
-        String sectionName="Portfolio";
+        String sectionName="PORTFOLIO";
         List<String> sectionItems=new ArrayList<>();
+        sectionItems.add("Your string");
         sectionItems.add("Hello");
         sectionItems.add("Bye");
         sectionItems.add("Hi");
 
-        String sectionName2="Favorites";
+        String sectionName2="FAVORTIES";
         List<String> sectionItems2=new ArrayList<>();
         sectionItems2.add("Hey");
         sectionItems2.add("Zey");
@@ -98,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.my_menu,menu);
         MenuItem menuItem=menu.findItem(R.id.search_icon);
         SearchView searchView=(SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Stocks");
+//        searchView.setQueryHint("Stocks");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -108,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                arrayAdapter.getFilter().filter(newText);
-                return true;
+//                arrayAdapter.getFilter().filter(newText);
+                return false;
             }
         });
 
