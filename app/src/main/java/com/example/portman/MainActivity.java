@@ -1,14 +1,18 @@
 package com.example.portman;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 //import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +34,8 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
@@ -56,11 +62,13 @@ public class MainActivity extends AppCompatActivity {
         initData();
         mainRecyclerView=findViewById(R.id.mainRecyclerView);
 
-        MainRecyclerAdapter mainRecyclerAdapter=new MainRecyclerAdapter(sectionList);
+        CoordinatorLayout coordinatorLayout=findViewById(R.id.coordinatorLayout);
+
+        MainRecyclerAdapter mainRecyclerAdapter=new MainRecyclerAdapter(this,sectionList);
         mainRecyclerView.setAdapter(mainRecyclerAdapter);
         mainRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
-
+//    enableSwipeToDeleteAndUndo(mainRecyclerAdapter,mainRecyclerView,coordinatorLayout);
 
 
 
@@ -85,6 +93,38 @@ public class MainActivity extends AppCompatActivity {
 //        listView.setAdapter(arrayAdapter);
 
 
+    }
+    private void enableSwipeToDeleteAndUndo(MainRecyclerAdapter mAdapter,RecyclerView recyclerView, CoordinatorLayout coordinatorLayout ) {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                final int position = viewHolder.getAdapterPosition();
+                final Section item = mAdapter.getData().get(position);
+
+                mAdapter.removeItem(position);
+
+
+                Snackbar snackbar = Snackbar
+                        .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
+                snackbar.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        mAdapter.restoreItem(item, position);
+                        recyclerView.scrollToPosition(position);
+                    }
+                });
+
+                snackbar.setActionTextColor(Color.YELLOW);
+                snackbar.show();
+
+            }
+        };
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
     }
     private void initData(){
         String sectionName="PORTFOLIO";

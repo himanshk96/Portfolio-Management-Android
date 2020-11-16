@@ -29,7 +29,14 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
             return 123567; // any random integer you can use
         return super.getItemViewType(position);
     }
-
+    public void removeItem(int position) {
+        this.items.remove(position);
+        notifyItemRemoved(position);
+    }
+    public void restoreItem(String item, int position) {
+        this.items.add(position, item);
+        notifyItemInserted(position);
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,6 +65,9 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
 
     }
 
+    public List<String> getData() {
+        return this.items;
+    }
     @Override
     public int getItemCount() {
         return items.size();
