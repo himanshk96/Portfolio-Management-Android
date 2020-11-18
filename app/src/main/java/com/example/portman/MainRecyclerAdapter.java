@@ -65,9 +65,11 @@ String sectionName=section.getSectionName() ;
     holder.childRecyclerview.setAdapter(childRecyclerAdapter);
 
 
+
+
         enableSwipeToDeleteAndUndo(childRecyclerAdapter, holder.coordinatorLayout,holder.childRecyclerview );
         Log.d("MainRecycler", "onBindViewHolder: called enableSwipte");
-
+        enableDragDrop(childRecyclerAdapter, holder.coordinatorLayout,holder.childRecyclerview );
 
     }
 
@@ -104,9 +106,29 @@ String sectionName=section.getSectionName() ;
             }
         };
 
+
+
+
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(recyclerView);
         Log.d("MAINRECYCLER", "enableSwipeToDeleteAndUndo: done");
+    }
+    public void enableDragDrop(ChildRecyclerAdapter mAdapter, CoordinatorLayout coordinatorLayout, RecyclerView recyclerView) {
+        Log.d("TAG", "enableSwipeToDeleteAndUndo: Working");
+
+        ItemTouchHelper.Callback callback =
+                new SimpleItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(recyclerView);
+
+
+        
+
+
+
+
+
+//        Log.d("MAINRECYCLER", "enableSwipeToDeleteAndUndo: done");
     }
 
     @Override

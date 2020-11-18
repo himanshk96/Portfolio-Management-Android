@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
+
 abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
 
     Context mContext;
@@ -52,6 +54,8 @@ abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
         return false;
+//        super.onRowMoved(viewHolder.getAdapterPosition(), viewHolder1.getAdapterPosition());
+//        return true;
     }
 
     @Override
