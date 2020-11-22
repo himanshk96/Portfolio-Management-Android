@@ -3,7 +3,7 @@ package com.example.portman;
 public class ItemRow {
 
 String stockName;
-float quantity;
+String quantity;
 float currPrice;
 float change;
 
@@ -11,7 +11,7 @@ float change;
         return stockName;
     }
 
-    public float getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
@@ -27,7 +27,7 @@ float change;
         this.stockName = stockName;
     }
 
-    public void setQuantity(float quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
@@ -39,7 +39,7 @@ float change;
         this.change = change;
     }
 
-    public ItemRow(String stockName, float quantity, float currPrice, float change) {
+    public ItemRow(String stockName, String quantity, float currPrice, float change) {
         this.stockName = stockName;
         this.quantity = quantity;
         this.currPrice = currPrice;

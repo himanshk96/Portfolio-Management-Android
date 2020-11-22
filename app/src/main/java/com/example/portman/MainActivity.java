@@ -2,20 +2,15 @@ package com.example.portman;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 //import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
@@ -27,7 +22,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,10 +32,7 @@ import java.util.Map;
 
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ArrayAdapter;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,8 +42,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int TRIGGER_AUTO_COMPLETE = 1300;
     private static final long AUTO_COMPLETE_DELAY = 100;
 
-
+    String backend="http://hw8portfolio-env.eba-xf5362dh.us-east-1.elasticbeanstalk.com/";
     public static final String TAG="MainActivity";
 
     ArrayAdapter<String> arrayAdapter;
@@ -126,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData(){
         String sectionName="PORTFOLIO";
+
         List<String> sectionItems=new ArrayList<>();
         sectionItems.add("Your string");
         sectionItems.add("Hello");
@@ -134,11 +126,10 @@ public class MainActivity extends AppCompatActivity {
 
         String sectionName2="FAVORTIES";
         List<String> sectionItems2=new ArrayList<>();
+//        getDailyData("aapl");
 
-
-
-
-
+//        Log.d(TAG, "initData: "+getIexData("aapl"));
+//        Log.d(TAG, "initData: "+getDailyData("aapl"));
         sectionItems2.add("Hey");
         sectionItems2.add("Zey");
         sectionItems2.add("Fi");
@@ -149,6 +140,37 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,"Referesh Every15 sec");
 
     }
+
+//    private JSONObject[] getIexData(String symbol){
+//        Log.d(TAG, "getIexData: call"+symbol);
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        final String url =backend+ "api/iex_data/multi/"+symbol;
+//        final JSONObject[] data = new JSONObject[1];
+//        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+//                new Response.Listener<JSONObject>()
+//                {
+//                    @Override
+//                    public void onResponse(JSONObject response)
+//                    {
+//
+//                        Log.e(" result"+response.length(),(String.valueOf(response)));
+//                        data[0] =response;
+//
+//                    }
+//                },
+//                new Response.ErrorListener()
+//                {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                }
+//        );
+//        requestQueue.add(getRequest);
+////        Log.d(TAG, "getIexData: "+data);
+//        return data;
+//    }
+
 
 
 //    @Override
@@ -274,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
     private void makeApiCall(String text) {
         RequestQueue queue = Volley.newRequestQueue(this);
         final List<String> stringList = new ArrayList<>();
-        String backend="http://hw8portfolio-env.eba-xf5362dh.us-east-1.elasticbeanstalk.com/";
+
         String url=backend+"api/search/"+text;
         JsonArrayRequest jjj = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
