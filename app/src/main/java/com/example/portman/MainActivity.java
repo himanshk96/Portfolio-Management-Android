@@ -118,22 +118,27 @@ public class MainActivity extends AppCompatActivity {
     private void initData(){
         String sectionName="PORTFOLIO";
 
-        List<String> sectionItems=new ArrayList<>();
-        sectionItems.add("Your string");
-        sectionItems.add("Hello");
-        sectionItems.add("Bye");
-        sectionItems.add("Hi");
+        List<ItemRow> sectionItems=new ArrayList<>();
+        sectionItems.add(new ItemRow("Net Worth","valuee",0,0));
+//        sectionItems.add("Hello");
+//        sectionItems.add("Bye");
+//        sectionItems.add("Hi");
+        sectionItems.add(new ItemRow("APPL","4",240,  2));
 
         String sectionName2="FAVORTIES";
-        List<String> sectionItems2=new ArrayList<>();
+        List<ItemRow> sectionItems2=new ArrayList<>();
+        sectionItems2.add(new ItemRow("APPL","4",240, 2));
+        sectionItems2.add(new ItemRow("TSLA","You dont any stock",240,  3));
+        sectionItems2.add(new ItemRow("IBM","1",240, 5));
+
 //        getDailyData("aapl");
 
 //        Log.d(TAG, "initData: "+getIexData("aapl"));
 //        Log.d(TAG, "initData: "+getDailyData("aapl"));
-        sectionItems2.add("Hey");
-        sectionItems2.add("Zey");
-        sectionItems2.add("Fi");
-        sectionItems2.add("Fi");
+//        sectionItems2.add("Hey");
+//        sectionItems2.add("Zey");
+//        sectionItems2.add("Fi");
+//        sectionItems2.add("Fi");
 
         sectionList.add(new Section(sectionName,sectionItems));
         sectionList.add(new Section(sectionName2,sectionItems2));

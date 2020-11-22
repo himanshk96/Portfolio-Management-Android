@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Section {
 private String sectionName;
-private List<String> sectionItems;
+private List<ItemRow> sectionItems;
 
     public String getSectionName() {
         return sectionName;
     }
 
-    public List<String> getSectionItems() {
+    public List<ItemRow> getSectionItems() {
         return sectionItems;
     }
 
@@ -20,11 +20,11 @@ private List<String> sectionItems;
         this.sectionName = sectionName;
     }
 
-    public void setSectionItems(List<String> sectionItems) {
+    public void setSectionItems(List<ItemRow> sectionItems) {
         this.sectionItems = sectionItems;
     }
 
-    public Section(String sectionName, List<String> sectionItems){
+    public Section(String sectionName, List<ItemRow> sectionItems){
     this.sectionItems=sectionItems;
     this.sectionName=sectionName;
 }

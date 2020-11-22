@@ -56,7 +56,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     public void onBindViewHolder(@NonNull MainRecyclerAdapter.ViewHolder holder, int position) {
 Section section=sectionList.get(position);
 String sectionName=section.getSectionName() ;
-    List<String> items= section.getSectionItems();
+        List<ItemRow> items= section.getSectionItems();
     holder.sectionNameTextView.setText(sectionName);
 
     ChildRecyclerAdapter childRecyclerAdapter=new ChildRecyclerAdapter(items);
@@ -80,11 +80,12 @@ String sectionName=section.getSectionName() ;
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
                 Log.d("enableSwipe", "onSwiped: Swipped Child");
 
                 final int position = viewHolder.getAdapterPosition();
-
-                final String item = mAdapter.getData().get(position);
+    //This is important
+//                final String item = mAdapter.getData().get(position);
 
                 mAdapter.removeItem(position);
 
