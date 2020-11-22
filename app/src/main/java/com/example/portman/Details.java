@@ -113,8 +113,7 @@ public class Details extends AppCompatActivity {
                         watchlist.remove(titleSymbol);
                         starButton.setBackgroundResource(R.drawable.ic_baseline_star_border_24);
                         int dur=Toast.LENGTH_SHORT;
-                        CharSequence text = "'"+titleSymbol+"'"+" was removed frome Favorites";
-
+                        CharSequence text = "'"+titleSymbol+"'"+" was removed from Favorites";
                         Toast toast = Toast.makeText(getApplicationContext(), text, dur);
                         toast.show();
                     }

@@ -17,7 +17,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:contentInsetStart="8dp"
-      app:layout_constraintVertical_bias="0.0"  android:background="@color/grey">
+      app:layout_constraintVertical_bias="0.0"  android:background="@color/grey" app:titleTextColor="@color/black">
 
     <TextView
         android:id="@+id/textView"
@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="visible"  />
 
 
   </androidx.appcompat.widget.Toolbar>
