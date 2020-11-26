@@ -2,6 +2,7 @@ package com.example.portman;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -44,6 +45,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
 
     ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> watchlist;
     List<Section> sectionList=new ArrayList<>();
     RecyclerView mainRecyclerView;
 
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         // Search part complete
 
         initData();
+
         mainRecyclerView=findViewById(R.id.mainRecyclerView);
 
         CoordinatorLayout coordinatorLayout=findViewById(R.id.coordinatorLayout);
@@ -116,17 +121,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData(){
+        backendCalls backend=new backendCalls(this);
+//        ArrayList w=new ArrayList<String>();
+//        ArrayinsertToSP(w,"watchlist");
+        this.watchlist =ArrayreadFromSP("watchlist");
+        String watchlist_string= String.join(",", this.watchlist);
+        Log.d(TAG, "initData:Watchlist"+watchlist_string);
+
         String sectionName="PORTFOLIO";
 
         List<ItemRow> sectionItems=new ArrayList<>();
         sectionItems.add(new ItemRow("Net Worth","valuee",0,0));
 //        sectionItems.add("Hello");
-//        sectionItems.add("Bye");
-//        sectionItems.add("Hi");
         sectionItems.add(new ItemRow("APPL","4",240,  2));
 
+
         String sectionName2="FAVORTIES";
+
+       JSONArray[] iex_data= backend.getIexData(watchlist_string);
+        for(int i = 0; i < iex_data.length; i++ ) {
+
+        }
+//        iexData[0]
+//         Log.d(TAG, "initData: "+aapls);
+//        ArrayList arr= iexData.arr;
+        final JSONObject[] aaplsa=backend.getDailyData("aapl");
+
         List<ItemRow> sectionItems2=new ArrayList<>();
+//        for(int i=0;i<watchlist.size();i++){
+//            sectionItems2.add(new ItemRow(watchlist.get(i),));
+//        }
         sectionItems2.add(new ItemRow("APPL","4",240, 2));
         sectionItems2.add(new ItemRow("TSLA","You dont any stock",240,  3));
         sectionItems2.add(new ItemRow("IBM","1",240, 5));
@@ -344,4 +368,40 @@ public class MainActivity extends AppCompatActivity {
         details_intent.putExtra("symbol",symbol);
         this.startActivity(details_intent);
     }
+    private void insertToSP(HashMap<String, String> jsonMap,String data_) {
+        String jsonString = new Gson().toJson(jsonMap);
+        SharedPreferences sharedPreferences = getSharedPreferences("HashMap", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(data_, jsonString);
+        editor.apply();
+    }
+
+
+    private HashMap<String, String> readFromSP(String data_){
+        SharedPreferences sharedPreferences = getSharedPreferences("HashMap", MODE_PRIVATE);
+        String defValue = new Gson().toJson(new HashMap<String, String>());
+        String json=sharedPreferences.getString(data_,defValue);
+        TypeToken<HashMap<String,String>> token = new TypeToken<HashMap<String,String>>() {};
+        HashMap<String,String> retrievedMap=new Gson().fromJson(json,token.getType());
+        return retrievedMap;
+    }
+    private void ArrayinsertToSP(ArrayList<String> jsonMap, String data_) {
+        String jsonString = new Gson().toJson(jsonMap);
+        SharedPreferences sharedPreferences = getSharedPreferences("ArrayList", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(data_, jsonString);
+        editor.apply();
+    }
+
+
+    private ArrayList<String> ArrayreadFromSP(String data_){
+        SharedPreferences sharedPreferences = getSharedPreferences("ArrayList", MODE_PRIVATE);
+        String defValue = new Gson().toJson(new ArrayList<String>());
+        String json=sharedPreferences.getString(data_,defValue);
+        TypeToken<ArrayList<String>> token = new TypeToken<ArrayList<String>>() {};
+        ArrayList<String> retrievedMap=new Gson().fromJson(json,token.getType());
+        Log.d(TAG, "ArrayreadFromSP: Works");
+        return retrievedMap;
+    }
+
 }

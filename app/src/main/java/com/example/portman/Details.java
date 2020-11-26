@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,11 +33,16 @@ public class Details extends AppCompatActivity {
     private TextView titleCompanyView;
     private TextView titlePriceView;
     private TextView titleChangeView;
+
+    private Button showMoreButton;
+    private TextView aboutStock;
+
     HashMap<String,String> ticker_mapping;
     ArrayList<String> watchlist;
     Boolean inWatchList;
     ImageView starButton;
     String titleSymbol;
+String demo="This is a companyd demo. xysasidhasdfuasdfsdfis This is a companyd demo. This is a companyd demo. This is a companyd demo. This is a companyd demo. This is a companyd demo. This is a companyd demo. This is a companyd demo.";
     HashMap<String,Integer> portfolio_qty= new HashMap<String,Integer>();
 //    HashMap<Integer, String> hash_map = new HashMap<Integer, String>();
 
@@ -69,6 +75,12 @@ public class Details extends AppCompatActivity {
         titleChangeView=(TextView) findViewById(R.id.titleChange);
 
 
+
+
+        aboutStock =(TextView) findViewById(R.id.textView_about)         ;
+        aboutStock.setText(demo);
+        showMoreButton = (Button) findViewById(R.id.button_showmore);
+        showMoreButton.setOnClickListener(showMoreListenere);
         Intent currIntent=getIntent();
         titleSymbol=currIntent.getStringExtra("symbol");
         Log.d(TAG, "onCreate: "+titleSymbol);
@@ -126,7 +138,26 @@ public class Details extends AppCompatActivity {
             }
         });
 
+
+
     }
+    private View.OnClickListener showMoreListenere = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(getApplicationContext(),"show more",Toast.LENGTH_SHORT).show();
+            if(showMoreButton.getText().equals("Show more...")){
+                showMoreButton.setText("Show less");
+                aboutStock.setEllipsize(null);
+
+                aboutStock.setMaxLines(Integer.MAX_VALUE);
+            }
+            else {//clicked show less
+                showMoreButton.setText("Show more...");
+                aboutStock.setEllipsize(TextUtils.TruncateAt.END);
+                aboutStock.setMaxLines(2);
+            }
+        }
+    };
 
     private void insertToSP(HashMap<String, String> jsonMap,String data_) {
         String jsonString = new Gson().toJson(jsonMap);

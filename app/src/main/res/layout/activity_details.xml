@@ -153,7 +153,27 @@
         android:textColor="@color/white"
 ></Button>
 </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_about"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textAlignment="center"
+        android:text="about text"
+        android:textColor="@color/black"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingRight="8dp"
 
+        android:text="Show more..."
+        android:textAllCaps="false"
+        android:id="@+id/button_showmore"
+        android:minHeight="0dp"
+        android:background="@null"
+        android:textColor="#8b8b8b"/>
 
 
 
